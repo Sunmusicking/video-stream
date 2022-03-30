@@ -78,7 +78,7 @@ async def start_(c: Client, message: Message):
             [
                 [
                     InlineKeyboardButton("✨ Update", url=f"https://t.me/CFC_BOTS"),
-                    InlineKeyboardButton("About", callback_data="user_guide")
+                    InlineKeyboardButton("About", callback_data="user_guide"),
                     InlineKeyboardButton("📣 Support", url=f"https://t.me/CFC_BOT_SUPPORT")
                 ],
                 [
