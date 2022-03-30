@@ -1,22 +1,3 @@
-"""
-Video + Music Stream Telegram Bot
-Copyright (c) 2022-present levina=lab <https://github.com/levina-lab>
-
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but without any warranty; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program. If not, see <https://www.gnu.org/licenses/licenses.html>
-"""
-
-
 import asyncio
 
 from datetime import datetime
@@ -84,27 +65,28 @@ async def start_(c: Client, message: Message):
     user_id = message.from_user.id
     await add_served_user(user_id)
     await message.reply_text(
-        f"""Hi {message.from_user.mention()} 👋🏻\n
-💭 [{me_bot.first_name}](https://t.me/{me_bot.username}) is a bot to play music and video in groups, through the new Telegram video chats.
+        f"""hey buddy {message.from_user.mention()} 👋🏻 i am [{me_bot.first_name}](https://t.me/{me_bot.username})
 
-🕵🏻 Check out all the **Bot's commands** and how they work by clicking on the » 📚 **Commands** button!
+❍ I am music player who play's music on group voice chat without any lag.
 
-🧑🏻‍💻 To know how to use this bot, please click on the » ❓ **Basic Guide** button!
-""",
+❍ You need to just make admin me in your group .
+
+❍ Cheak my all comands by tap on button **Commmands** 
+
+❍ Tap on that button also you can change my langauge soon.""",
         reply_markup=InlineKeyboardMarkup(
             [
                 [
-                    InlineKeyboardButton("➕ Add me to a Group ➕", url=f"https://t.me/{me_bot.username}?startgroup=true")
-                ],[
-                    InlineKeyboardButton("❓ Basic Guide", callback_data="user_guide")
-                ],[
-                    InlineKeyboardButton("📚 Commands", callback_data="command_list"),
-                    InlineKeyboardButton("❤️ Donate", url=f"https://t.me/{OWNER_USERNAME}")
-                ],[
-                    InlineKeyboardButton("👥 Support Group", url=f"https://t.me/{GROUP_SUPPORT}"),
-                    InlineKeyboardButton("📣 Support Channel", url=f"https://t.me/{UPDATES_CHANNEL}")
-                ],[
-                    InlineKeyboardButton("🌐 Source Code", url="https://github.com/levina-lab/video-stream")
+                    InlineKeyboardButton("✨ Update", url=f"https://t.me/CFC_BOTS")
+                    InlineKeyboardButton("About", callback_data="user_guide"),,
+                    InlineKeyboardButton("📣 Support", url=f"https://t.me/CFC_BOT_SUPPORT")
+                ],
+                [
+                    InlineKeyboardButton("❓Commands", callback_data="commands")
+                    InlineKeyboardButton("🏳️‍🌈Langauge", callback_data="langauge")
+                ],
+                [
+                    InlineKeyboardButton("Aᴅᴅ ᴍᴇ ᴛᴏ ɢʀᴏᴜᴘ 📍", url=f"https://t.me/CFCMUSICBOT?startgroup=true"),
                 ],
             ]
         ),
@@ -113,7 +95,7 @@ async def start_(c: Client, message: Message):
 
 
 @Client.on_message(
-    command(["alive", f"alive@{BOT_USERNAME}"]) & filters.group & ~filters.edited
+    command(["cfc", f"cfc@{BOT_USERNAME}"]) & filters.group & ~filters.edited
 )
 @check_blacklist()
 async def alive(c: Client, message: Message):
@@ -124,17 +106,17 @@ async def alive(c: Client, message: Message):
     buttons = InlineKeyboardMarkup(
         [
             [
-                InlineKeyboardButton("✨ Group", url=f"https://t.me/{GROUP_SUPPORT}"),
+                InlineKeyboardButton("✨ Support", url=f"https://t.me/{GROUP_SUPPORT}"),
                 InlineKeyboardButton(
-                    "📣 Channel", url=f"https://t.me/{UPDATES_CHANNEL}"
+                    "📣 Update", url=f"https://t.me/{UPDATES_CHANNEL}"
                 ),
             ]
         ]
     )
-    text = f"**Hello {message.from_user.mention()}, I'm {me_bot.first_name}**\n\n🧑🏼‍💻 My Master: [{ALIVE_NAME}](https://t.me/{OWNER_USERNAME})\n👾 Bot Version: `v{__version__}`\n🔥 Pyrogram Version: `{pyrover}`\n🐍 Python Version: `{__python_version__}`\n✨ PyTgCalls Version: `{pytover.__version__}`\n🆙 Uptime Status: `{uptime}`\n\n❤ **Thanks for Adding me here, for playing video & music on your Group's video chat**"
+    text = f"**❍ Hey i am CFCMusic bot and i play music on group voice chats.** \n\n**❍ Add me in your group and enjoy smooth music on voice chats.**\n\n**❍ This bot is made by CFC Network also thanks for veez music.**\n\n**❍ Join your Updates channel and Support group for cheak new updates.**\n\n**❍ Special thanks to CFC Network.** "
     await c.send_photo(
         chat_id,
-        photo=f"{ALIVE_IMG}",
+        photo=f"https://telegra.ph/file/1e884aae78c319c40207c.jpg",
         caption=text,
         reply_markup=buttons,
     )
