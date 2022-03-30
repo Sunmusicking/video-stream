@@ -77,7 +77,7 @@ async def start_(c: Client, message: Message):
         reply_markup=InlineKeyboardMarkup(
             [
                 [
-                    InlineKeyboardButton("✨ Update", url=f"https://t.me/CFC_BOTS")
+                    InlineKeyboardButton("✨ Update", url=f"https://t.me/CFC_BOTS"),
                     InlineKeyboardButton("About", callback_data="user_guide")
                     InlineKeyboardButton("📣 Support", url=f"https://t.me/CFC_BOT_SUPPORT")
                 ],
