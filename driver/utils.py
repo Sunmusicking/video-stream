@@ -25,8 +25,8 @@ from pytgcalls.types import Update
 keyboard = InlineKeyboardMarkup(
     [
         [
-            InlineKeyboardButton(text="• Mᴇɴᴜ", callback_data="stream_menu_panel"),
-            InlineKeyboardButton(text="• Cʟᴏsᴇ", callback_data="set_close"),
+            InlineKeyboardButton(text="✨ Updates", url="https://t.me/CFC_BOTS"),
+            InlineKeyboardButton(text="📣 Support", url="https://t.me/CFC_BOT_SUPPORT"),
         ]
     ]
 )
@@ -131,12 +131,12 @@ async def stream_end_handler(_, u: Update):
         elif queue == 2:
             await bot.send_message(
                 chat_id,
-                "❌ an error occurred\n\n» **Clearing** Queues and leaving video chat.",
+                "❌ Something error music bot leaving voice-chat.",
             )
         else:
             await bot.send_message(
                 chat_id,
-                f"💡 **Streaming next track**\n\n🗂 **Name:** [{queue[0]}]({queue[1]}) | `{queue[2]}`\n💭 **Chat:** `{chat_id}`",
+                f"💡 **Powerd by CFCMusic **\n\n🗂 **Name:** [{queue[0]}]({queue[1]}) | `{queue[2]}`\n💭 **Chat:** `{chat_id}`",
                 disable_web_page_preview=True,
                 reply_markup=keyboard,
             )
