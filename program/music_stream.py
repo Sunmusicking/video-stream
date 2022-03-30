@@ -1,22 +1,3 @@
-"""
-Video + Music Stream Telegram Bot
-Copyright (c) 2022-present levina=lab <https://github.com/levina-lab>
-
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but without any warranty; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program. If not, see <https://www.gnu.org/licenses/licenses.html>
-"""
-
-
 import re
 import asyncio
 
@@ -85,7 +66,7 @@ async def play_tg_file(c: Client, m: Message, replied: Message = None, link: str
             return await m.reply_text(f"🚫 error:\n\n» {e}")
     if not replied:
         return await m.reply(
-            "» reply to an **audio file** or **give something to search.**"
+            "Reply to any audio file for play audio on vc. . **"
         )
     if replied.audio or replied.voice:
         if not link:
@@ -119,7 +100,7 @@ async def play_tg_file(c: Client, m: Message, replied: Message = None, link: str
             thumbnail = f"{IMG_5}"
 
         if chat_id in QUEUE:
-            await suhu.edit("🔄 Queueing Track...")
+            await suhu.edit("🔄 Loading...")
             gcname = m.chat.title
             ctitle = await CHAT_TITLE(gcname)
             title = songname
@@ -145,7 +126,7 @@ async def play_tg_file(c: Client, m: Message, replied: Message = None, link: str
                 title = songname
                 userid = m.from_user.id
                 image = await thumb(thumbnail, title, userid, ctitle)
-                await suhu.edit("🔄 Joining Group Call...")
+                await suhu.edit("🔄 Conecting to vc...")
                 await music_on(chat_id)
                 await add_active_chat(chat_id)
                 await calls.join_group_call(
@@ -178,7 +159,7 @@ async def play_tg_file(c: Client, m: Message, replied: Message = None, link: str
                 LOGS.info(e)
     else:
         await m.reply_text(
-            "» reply to an **audio file** or **give something to search.**"
+            "Reply to any audio file to play audio on vc."
         )
 
 
@@ -192,14 +173,14 @@ async def audio_stream(c: Client, m: Message):
     user_id = m.from_user.id
     if m.sender_chat:
         return await m.reply_text(
-            "you're an __Anonymous__ user !\n\n» revert back to your real user account to use this bot."
+            "you're an anonymous user revert back to your real user account to use this bot."
         )
     try:
         ubot = me_user.id
         b = await c.get_chat_member(chat_id, ubot)
         if b.status == "banned":
             try:
-                await m.reply_text("❌ The userbot is banned in this chat, unban the userbot first to be able to play music !")
+                await m.reply_text("The userbot is banned in this chat, unban the userbot first to be able to play music !")
                 await remove_active_chat(chat_id)
             except BaseException:
                 pass
@@ -230,7 +211,7 @@ async def audio_stream(c: Client, m: Message):
         except Exception as e:
             LOGS.info(e)
             return await m.reply_text(
-                f"❌ **userbot failed to join**\n\n**reason**: `{e}`"
+                f"❗ userbot failed to join becoz : `{e}`"
             )
     if replied:
         if replied.audio or replied.voice:
@@ -238,7 +219,7 @@ async def audio_stream(c: Client, m: Message):
         else:
             if len(m.command) < 2:
                 await m.reply(
-                    "» reply to an **audio file** or **give something to search.**"
+                    "Reply to any audio file for play audio on vc.**"
                 )
             else:
                 suhu = await c.send_message(chat_id, "🔍 **Loading...**")
@@ -261,7 +242,7 @@ async def audio_stream(c: Client, m: Message):
                         await suhu.edit(f"❌ yt-dl issues detected\n\n» `{ytlink}`")
                     else:
                         if chat_id in QUEUE:
-                            await suhu.edit("🔄 Queueing Track...")
+                            await suhu.edit("🔄 Loading...")
                             pos = add_to_queue(
                                 chat_id, songname, ytlink, url, "music", 0
                             )
@@ -271,12 +252,12 @@ async def audio_stream(c: Client, m: Message):
                             await m.reply_photo(
                                 photo=image,
                                 reply_markup=InlineKeyboardMarkup(buttons),
-                                caption=f"💡 **Track added to queue »** `{pos}`\n\n🗂 **Name:** [{songname}]({url}) | `music`\n**⏱ Duration:** `{duration}`\n🧸 **Request by:** {requester}",
+                                caption=f"💡 **Powerd by CFCMusic ** `{pos}`\n\n🗂 **Name:** [{songname}]({url}) | `music`\n**⏱ Duration:** `{duration}`\n🧸 **Request by:** {requester}",
                             )
                             remove_if_exists(image)
                         else:
                             try:
-                                await suhu.edit("🔄 Joining Group Call...")
+                                await suhu.edit("🔄 Conecting to vc...")
                                 await music_on(chat_id)
                                 await add_active_chat(chat_id)
                                 await calls.join_group_call(
@@ -310,7 +291,7 @@ async def audio_stream(c: Client, m: Message):
     else:
         if len(m.command) < 2:
             await m.reply(
-                "» reply to an **audio file** or **give something to search.**"
+                "Reply to any audio file for play audio on vc.**"
             )
         elif "t.me" in m.command[1]:
             for i in m.command[1:]:
@@ -338,7 +319,7 @@ async def audio_stream(c: Client, m: Message):
                     await suhu.edit(f"❌ yt-dl issues detected\n\n» `{ytlink}`")
                 else:
                     if chat_id in QUEUE:
-                        await suhu.edit("🔄 Queueing Track...")
+                        await suhu.edit("🔄 Loading...")
                         pos = add_to_queue(chat_id, songname, ytlink, url, "music", 0)
                         await suhu.delete()
                         requester = f"[{m.from_user.first_name}](tg://user?id={m.from_user.id})"
@@ -346,12 +327,12 @@ async def audio_stream(c: Client, m: Message):
                         await m.reply_photo(
                             photo=image,
                             reply_markup=InlineKeyboardMarkup(buttons),
-                            caption=f"💡 **Track added to queue »** `{pos}`\n\n🗂 **Name:** [{songname}]({url}) | `music`\n**⏱ Duration:** `{duration}`\n🧸 **Request by:** {requester}",
+                            caption=f"💡 **Powerd by CFC Music ** `{pos}`\n\n🗂 **Name:** [{songname}]({url}) | `music`\n**⏱ Duration:** `{duration}`\n🧸 **Request by:** {requester}",
                         )
                         remove_if_exists(image)
                     else:
                         try:
-                            await suhu.edit("🔄 Joining Group Call...")
+                            await suhu.edit("🔄 Conecting to vc...")
                             await music_on(chat_id)
                             await add_active_chat(chat_id)
                             await calls.join_group_call(
@@ -391,7 +372,7 @@ async def live_music_stream(c: Client, m: Message):
     user_id = m.from_user.id
     if m.sender_chat:
         return await m.reply_text(
-            "you're an __Anonymous__ user !\n\n» revert back to your real user account to use this bot."
+            "you're an anonymus user !\n\n» revert back to your real user account to use this bot."
         )
     try:
         ubot = me_user.id
@@ -448,7 +429,7 @@ async def live_music_stream(c: Client, m: Message):
         else:
             if "m3u8" in url:
                 if chat_id in QUEUE:
-                    await msg.edit_text("🔄 Queueing Track...")
+                    await msg.edit_text("🔄 Loading...")
                     pos = add_to_queue(chat_id, "m3u8 audio", data, url, "music", 0)
                     await msg.delete()
                     requester = f"[{m.from_user.first_name}](tg://user?id={m.from_user.id})"
@@ -456,11 +437,11 @@ async def live_music_stream(c: Client, m: Message):
                     await m.reply_photo(
                         photo=f"{IMG_1}",
                         reply_markup=InlineKeyboardMarkup(buttons),
-                        caption=f"💡 **Track added to queue »** `{pos}`\n\n🗂 **Name:** [m3u8 audio stream]({url}) | `live`\n🧸 **Requested by:** {requester}",
+                        caption=f"💡 **Powerd by CFCMusic ** `{pos}`\n\n🗂 **Name:** [m3u8 audio stream]({url}) | `live`\n🧸 **Requested by:** {requester}",
                     )
                 else:
                     try:
-                        await msg.edit_text("🔄 Joining Group Call...")
+                        await msg.edit_text("🔄 Conecting to vc...")
                         await music_on(chat_id)
                         await add_active_chat(chat_id)
                         await calls.join_group_call(
@@ -498,7 +479,7 @@ async def live_music_stream(c: Client, m: Message):
                 ctitle = await CHAT_TITLE(gcname)
                 image = await thumb(thumbnail, title, userid, ctitle)
                 if chat_id in QUEUE:
-                    await msg.edit_text("🔄 Queueing Track...")
+                    await msg.edit_text("🔄 Loading...")
                     pos = add_to_queue(chat_id, songname, data, url, "music", 0)
                     await msg.delete()
                     requester = f"[{m.from_user.first_name}](tg://user?id={m.from_user.id})"
@@ -506,12 +487,12 @@ async def live_music_stream(c: Client, m: Message):
                     await m.reply_photo(
                         photo=image,
                         reply_markup=InlineKeyboardMarkup(buttons),
-                        caption=f"💡 **Track added to queue »** `{pos}`\n\n🗂 **Name:** [{songname}]({url}) | `live`\n🧸 **Requested by:** {requester}",
+                        caption=f"💡 **Powerd by CFC Music »** `{pos}`\n\n🗂 **Name:** [{songname}]({url}) | `live`\n🧸 **Requested by:** {requester}",
                     )
                     remove_if_exists(image)
                 else:
                     try:
-                        await msg.edit_text("🔄 Joining Group Call...")
+                        await msg.edit_text("🔄 Conecting to vc...")
                         await music_on(chat_id)
                         await add_active_chat(chat_id)
                         await calls.join_group_call(
@@ -543,4 +524,4 @@ async def live_music_stream(c: Client, m: Message):
                     except TimeoutError:
                         await msg.delete()
                         await remove_active_chat(chat_id)
-                        await m.reply_text("The process was cancelled, please try again later or use `/vstream` command to stream in audio only.")
+                        await m.reply_text("The process was cancelled, please try again later.")
