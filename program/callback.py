@@ -1,22 +1,3 @@
-"""
-Video + Music Stream Telegram Bot
-Copyright (c) 2022-present levina=lab <https://github.com/levina-lab>
-
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but without any warranty; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program. If not, see <https://www.gnu.org/licenses/licenses.html>
-"""
-
-
 from driver.core import me_bot, me_user
 from driver.queues import QUEUE
 from driver.decorators import check_blacklist
@@ -39,83 +20,63 @@ from config import (
 async def start_set(_, query: CallbackQuery):
     await query.answer("home start")
     await query.edit_message_text(
-        f"""Hi [{query.message.chat.first_name}](tg://user?id={query.message.chat.id}) 👋🏻\n
-💭 [{me_bot.first_name}](https://t.me/{me_bot.username}) is a bot to play music and video in groups, through the new Telegram video chats.
+        f"""hey buddy {message.from_user.mention()} 👋🏻 i am [{me_bot.first_name}](https://t.me/{me_bot.username})
+        
+❍ I am music player who play's music on group voice chat without any lag.
 
-🕵🏻 Check out all the **Bot's commands** and how they work by clicking on the » 📚 **Commands** button!
+❍ You need to just make admin me in your group.
 
-🧑🏻‍💻 To know how to use this bot, please click on the » ❓ **Basic Guide** button!
-""",
+❍ Cheak my all comands by tap on button **Commmands** 
+
+❍ Tap on that button also you can change my langauge soon.""",
         reply_markup=InlineKeyboardMarkup(
             [
                 [
-                    InlineKeyboardButton("➕ Add me to a Group ➕", url=f"https://t.me/{me_bot.username}?startgroup=true")
-                ],[
-                    InlineKeyboardButton("❓ Basic Guide", callback_data="user_guide")
-                ],[
-                    InlineKeyboardButton("📚 Commands", callback_data="command_list"),
-                    InlineKeyboardButton("❤️ Donate", url=f"https://t.me/{OWNER_USERNAME}")
-                ],[
-                    InlineKeyboardButton("👥 Support Group", url=f"https://t.me/{GROUP_SUPPORT}"),
-                    InlineKeyboardButton("📣 Support Channel", url=f"https://t.me/{UPDATES_CHANNEL}")
-                ],[
-                    InlineKeyboardButton("🌐 Source Code", url="https://github.com/levina-lab/video-stream")
+                    InlineKeyboardButton("✨ Update", url=f"https://t.me/CFC_BOTS"),
+                    InlineKeyboardButton("About", callback_data="about"),
+                    InlineKeyboardButton("📣 Support", url=f"https://t.me/CFC_BOT_SUPPORT"),
+                ],
+                [
+                    InlineKeyboardButton("❓Commands", callback_data="commands"),
+                    InlineKeyboardButton("🏳️‍🌈Langauge", callback_data="langauge"),
+                ],
+                [
+                    InlineKeyboardButton("Aᴅᴅ ᴍᴇ ᴛᴏ ɢʀᴏᴜᴘ 📍", url=f"https://t.me/CFCMUSICBOT?startgroup=true"),
                 ],
             ]
         ),
         disable_web_page_preview=True,
     )
 
-
-@Client.on_callback_query(filters.regex("quick_use"))
-@check_blacklist()
-async def quick_set(_, query: CallbackQuery):
-    await query.answer("quick bot usage")
-    await query.edit_message_text(
-        f"""ℹ️ Quick use Guide bot, please read fully !
-
-👩🏻‍💼 » /play - Type this with give the song title or youtube link or audio file to play Music. (Remember to don't play YouTube live stream by using this command!, because it will cause unforeseen problems.)
-
-👩🏻‍💼 » /vplay - Type this with give the song title or youtube link or video file to play Video. (Remember to don't play YouTube live video by using this command!, because it will cause unforeseen problems.)
-
-👩🏻‍💼 » /vstream - Type this with give the YouTube live stream video link or m3u8 link to play live Video. (Remember to don't play local audio/video files or non-live YouTube video by using this command!, because it will cause unforeseen problems.)
-
-❓ Have questions? Contact us in [Support Group](https://t.me/{GROUP_SUPPORT}).""",
-        reply_markup=InlineKeyboardMarkup(
-            [[InlineKeyboardButton("🔙 Go Back", callback_data="user_guide")]]
-        ),
-        disable_web_page_preview=True,
-    )
-
-
-@Client.on_callback_query(filters.regex("user_guide"))
+# ABOUT CFC MUSIC BOT ****************************************************************************************************************************************
+@Client.on_callback_query(filters.regex("about"))
 @check_blacklist()
 async def guide_set(_, query: CallbackQuery):
     await query.answer("user guide")
     await query.edit_message_text(
-        f"""❓ How to use this Bot ?, read the Guide below !
+        f"""🧩  This is about CFC Music bot
 
-1.) First, add this bot to your Group.
-2.) Then, promote this bot as administrator on the Group also give all permissions except Anonymous admin.
-3.) After promoting this bot, type /reload in Group to update the admin data.
-3.) Invite @{me_user.username} to your group or type /userbotjoin to invite her, unfortunately the userbot will joined by itself when you type `/play (song name)` or `/vplay (song name)`.
-4.) Turn on/Start the video chat first before start to play video/music.
+❍ Hey welcome hear to CFC's private page we are saying big thanks to you for using our bot.
 
-`- END, EVERYTHING HAS BEEN SETUP -`
+❍ Our bot is superfast with smooth music player with advance new featurs
 
-📌 If the userbot not joined to video chat, make sure if the video chat already turned on and the userbot in the chat.
+❍ We remove no need space up plugins & CFC is now is stable and easily deploy in 2 min.
 
-💡 If you have a follow-up questions about this bot, you can tell it on my support chat here: @{GROUP_SUPPORT}.""",
+❍ Soon i am sharing the source code of this bot with
+
+ 💡 Powerd by @CFC_BOTS.""",
         reply_markup=InlineKeyboardMarkup(
             [
                 [
-                    InlineKeyboardButton("» Quick use Guide «", callback_data="quick_use")
+                    InlineKeyboardButton("Source 📁", url=f"https://github.com/TeamNoinoi/CFCMusic"),
+                    InlineKeyboardButton("Network 🌎", url=f"https://t.me/PHOENIX_EMPIRE"),
                 ],[
-                    InlineKeyboardButton("🔙 Go Back", callback_data="home_start")
+                    InlineKeyboardButton("Back", callback_data="home_start")
                 ],
             ]
         ),
     )
+# ABOUT CFC MUSIC BOT END ****************************************************************************************************************************************
 
 
 @Client.on_callback_query(filters.regex("command_list"))
