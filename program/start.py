@@ -82,8 +82,8 @@ async def start_(c: Client, message: Message):
                     InlineKeyboardButton("📣 Support", url=f"https://t.me/CFC_BOT_SUPPORT"),
                 ],
                 [
-                    InlineKeyboardButton("❓Commands", callback_data="commands")
-                    InlineKeyboardButton("🏳️‍🌈Langauge", callback_data="langauge")
+                    InlineKeyboardButton("❓Commands", callback_data="commands"),
+                    InlineKeyboardButton("🏳️‍🌈Langauge", callback_data="langauge"),
                 ],
                 [
                     InlineKeyboardButton("Aᴅᴅ ᴍᴇ ᴛᴏ ɢʀᴏᴜᴘ 📍", url=f"https://t.me/CFCMUSICBOT?startgroup=true"),
