@@ -33,7 +33,7 @@ async def start_set(_, query: CallbackQuery):
             [
                 [
                     InlineKeyboardButton("✨ Update", url=f"https://t.me/CFC_BOTS"),
-                    InlineKeyboardButton("About", callback_data="about"),
+                    InlineKeyboardButton("About", callback_data="user_guide"),
                     InlineKeyboardButton("📣 Support", url=f"https://t.me/CFC_BOT_SUPPORT"),
                 ],
                 [
@@ -49,7 +49,7 @@ async def start_set(_, query: CallbackQuery):
     )
 
 # ABOUT CFC MUSIC BOT ****************************************************************************************************************************************
-@Client.on_callback_query(filters.regex("about"))
+@Client.on_callback_query(filters.regex("user_guide"))
 @check_blacklist()
 async def guide_set(_, query: CallbackQuery):
     await query.answer("user guide")
