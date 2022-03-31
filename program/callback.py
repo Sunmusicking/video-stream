@@ -15,7 +15,7 @@ from config import (
 )
 
 
-@Client.on_callback_query(filters.regex("home_start"))
+@Client.on_callback_query(filters.regex("noi_back"))
 @check_blacklist()
 async def start_set(_, query: CallbackQuery):
     await query.answer("home start")
@@ -37,7 +37,7 @@ async def start_set(_, query: CallbackQuery):
                     InlineKeyboardButton("📣 Support", url=f"https://t.me/CFC_BOT_SUPPORT"),
                 ],
                 [
-                    InlineKeyboardButton("❓Commands", callback_data="command_list"),
+                    InlineKeyboardButton("❓Commands", callback_data="cmd_list"),
                     InlineKeyboardButton("🏳️‍🌈Langauge", callback_data="langauge"),
                 ],
                 [
@@ -71,7 +71,7 @@ async def guide_set(_, query: CallbackQuery):
                     InlineKeyboardButton("Source 📁", url=f"https://github.com/TeamNoinoi/CFCMusic"),
                     InlineKeyboardButton("Network 🌎", url=f"https://t.me/PHOENIX_EMPIRE"),
                 ],[
-                    InlineKeyboardButton("Back", callback_data="home_start")
+                    InlineKeyboardButton("Back", callback_data="noi_back")
                 ],
             ]
         ),
@@ -79,7 +79,7 @@ async def guide_set(_, query: CallbackQuery):
 # ABOUT CFC MUSIC BOT END ****************************************************************************************************************************************
 
 
-@Client.on_callback_query(filters.regex("command_list"))
+@Client.on_callback_query(filters.regex("cmd_list"))
 @check_blacklist()
 async def commands_set(_, query: CallbackQuery):
     user_id = query.from_user.id
@@ -99,23 +99,23 @@ async def commands_set(_, query: CallbackQuery):
         reply_markup=InlineKeyboardMarkup(
             [
                 [
-                    InlineKeyboardButton("Music", callback_data="music_command"),
-                    InlineKeyboardButton("Admins", callback_data="admin_command"),
+                    InlineKeyboardButton("Music", callback_data="music_cmd"),
+                    InlineKeyboardButton("Admins", callback_data="admin_cmd"),
                 ],[
-                    InlineKeyboardButton("Stream", callback_data="stream_command"),
-                    InlineKeyboardButton("Other", callback_data="other_command"),
+                    InlineKeyboardButton("Stream", callback_data="stream_cmd"),
+                    InlineKeyboardButton("Other", callback_data="other_cmd"),
                 ],[
-                    InlineKeyboardButton("Sudo", callback_data="sudo_command"),
-                    InlineKeyboardButton("Owner", callback_data="owner_command"),
+                    InlineKeyboardButton("Sudo", callback_data="sudo_cmd"),
+                    InlineKeyboardButton("Owner", callback_data="owner_cmd"),
                 ],[
-                    InlineKeyboardButton("Back", callback_data="home_start")
+                    InlineKeyboardButton("Back", callback_data="noi_back")
                 ],
             ]
         ),
     )
 
 
-@Client.on_callback_query(filters.regex("music_command"))
+@Client.on_callback_query(filters.regex("music_cmd"))
 @check_blacklist()
 async def user_set(_, query: CallbackQuery):
     await query.answer("Music commands")
@@ -129,12 +129,12 @@ async def user_set(_, query: CallbackQuery):
 » /playlist - view the queue list of songs and current playing song
 """,
         reply_markup=InlineKeyboardMarkup(
-            [[InlineKeyboardButton("Back", callback_data="command_list")]]
+            [[InlineKeyboardButton("Back", callback_data="cmd_list")]]
         ),
     )
 
 
-@Client.on_callback_query(filters.regex("admin_command"))
+@Client.on_callback_query(filters.regex("admin_cmd"))
 @check_blacklist()
 async def admin_set(_, query: CallbackQuery):
     await query.answer("admin commands")
@@ -154,11 +154,11 @@ async def admin_set(_, query: CallbackQuery):
 » /startvc - start/restart the group call
 » /stopvc - stop/discard the group call""",
         reply_markup=InlineKeyboardMarkup(
-            [[InlineKeyboardButton("Back", callback_data="command_list")]]
+            [[InlineKeyboardButton("Back", callback_data="cmd_list")]]
         ),
     )
 
-@Client.on_callback_query(filters.regex("stream_command"))
+@Client.on_callback_query(filters.regex("stream_cmd"))
 @check_blacklist()
 async def admin_set(_, query: CallbackQuery):
     await query.answer("Streaming commands")
@@ -173,12 +173,12 @@ async def admin_set(_, query: CallbackQuery):
 » /uptime - show the bot uptime status
 » /alive - show the bot alive info (in Group only.""",
         reply_markup=InlineKeyboardMarkup(
-            [[InlineKeyboardButton("Back", callback_data="command_list")]]
+            [[InlineKeyboardButton("Back", callback_data="cmd_list")]]
         ),
     )
     
     
-@Client.on_callback_query(filters.regex("other_command"))
+@Client.on_callback_query(filters.regex("other_cmd"))
 @check_blacklist()
 async def admin_set(_, query: CallbackQuery):
     await query.answer("Streaming commands")
@@ -191,11 +191,11 @@ async def admin_set(_, query: CallbackQuery):
 » /unblock (`chat_id`) - use this to whitelist any group from using your bot
 » /blocklist - show you the list of all blacklisted chat.""",
         reply_markup=InlineKeyboardMarkup(
-            [[InlineKeyboardButton("Back", callback_data="command_list")]]
+            [[InlineKeyboardButton("Back", callback_data="cmd_list")]]
         ),
     )
     
-@Client.on_callback_query(filters.regex("sudo_command"))
+@Client.on_callback_query(filters.regex("sudo_cmd"))
 @check_blacklist()
 async def sudo_set(_, query: CallbackQuery):
     user_id = query.from_user.id
@@ -212,12 +212,12 @@ async def sudo_set(_, query: CallbackQuery):
 » /eval - run an code
 » /sh - run an code""",
         reply_markup=InlineKeyboardMarkup(
-            [[InlineKeyboardButton("Back", callback_data="command_list")]]
+            [[InlineKeyboardButton("Back", callback_data="cmd_list")]]
         ),
     )
 
 
-@Client.on_callback_query(filters.regex("owner_command"))
+@Client.on_callback_query(filters.regex("owner_cmd"))
 @check_blacklist()
 async def owner_set(_, query: CallbackQuery):
     user_id = query.from_user.id
@@ -237,7 +237,7 @@ async def owner_set(_, query: CallbackQuery):
 » /broadcast (`message`) - send a broadcast message to all groups in bot database
 » /broadcast_pin (`message`) - send a broadcast message to all groups in bot database with the chat pin""",
         reply_markup=InlineKeyboardMarkup(
-            [[InlineKeyboardButton("🔙 Go Back", callback_data="command_list")]]
+            [[InlineKeyboardButton("🔙 Go Back", callback_data="cmd_list")]]
         ),
     )
 
